@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AdminSendResetLinkMail;
 
+
 class AdminAuthenticationController extends Controller
 {
     //
@@ -47,15 +48,18 @@ public function logout(Request $request): RedirectResponse
     {
         $token = Str::random(64);
 
-        $admin = Admin::where('email', $request->email)->first();
+        $admin = Admin::where('email', $request->input('email'))->first();
         $admin->remember_token = $token;
         $admin->save();
 
-        Mail::to($request->email)->send(new AdminSendResetLinkMail($token, $request->email));
+        Mail::to($request->input('email'))->send(new AdminSendResetLinkMail($token, $request->input('email')));
 
 
         return redirect()->back()->with('success', __('admin.A mail has been sent to your email address please check!'));
 
     }
-
+     public function resetPassword($token)
+    {
+        return view('admin.auth.reset-password', compact('token'));
+    }
 }
