@@ -4,11 +4,10 @@ use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Frontend\HomeController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[HomeController::class, 'index']);
 
 
 
