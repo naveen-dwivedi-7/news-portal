@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Frontend\HomeController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -45,6 +46,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         Route::put('profile-password-update/{id}', [ ProfileController::class, 'passwordUpdate'])->name('profile-password.update');
 
     Route::resource('profile', ProfileController::class);
+
+    /** Language Routes */
+    Route::resource('language', LanguageController::class);
 });
 
 
